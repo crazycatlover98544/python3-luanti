@@ -30,6 +30,7 @@ import requests
 import os
 
 luantipath = 'luanti' # add this globally for the module so that way people can go [name].luantipath to change the luanti path globally without having to add it for every command
+_luantidebug_randominput = False # Enable the debug mode where the Luanti client inputs random inputs
 
 class WorldNotFound(Exception): # custom errors
     def __init__(self,message='World not found. This is a default message. If you wish to change it, add a string when you raise WorldNotFound (like this: WorldNotFound(str)).'): # is self even required here?
@@ -103,6 +104,8 @@ def startluanti(luanti_path='',world='',singleplayer=True,name='',password='',re
     
     if remoteserver:
         assembled_list = [luanti_path,'--go','--address',address,'--port',str(port),'--name',name,'--password',password]
+        if _luantidebug_randominput:
+            assembled_list.append('--random-input')
         subprocess.Popen(
             assembled_list,
             stdout=subprocess.DEVNULL,
@@ -121,6 +124,8 @@ def startluanti(luanti_path='',world='',singleplayer=True,name='',password='',re
                     assembled_list = [luanti_path,'--go','--worldname',world]
                 else:
                     assembled_list = [luanti_path,'--go','--worldname',world,'--name',name,'--password',password]
+                if _luantidebug_randominput:
+                    assembled_list.append('--random-input')
                 subprocess.Popen(
                     assembled_list,
                     stdout=subprocess.DEVNULL,
