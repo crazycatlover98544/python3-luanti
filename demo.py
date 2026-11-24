@@ -30,6 +30,7 @@ Possible Errors:
 luanti.startluanti can return the following errors:
   luanti.WorldNotFound: The specified world could not be found.
   luanti.LuantiError: An error occured with Luanti (non-zero exit code).
+  FileNotFoundError: Raised by subprocess if it cannot find Luanti.
 (Note that no error will occur if the client crashes, and luanti.startluanti is a non-blocking process).
 '''
 
